@@ -16,10 +16,10 @@ pipeline{
             steps{
                 sshagent(['33027ffa-0256-4d9b-846a-3b6f27864997']) {
             dir('kubernetes'){
-             sh "touch -o StrictHostKeyChecking=no hello.txt"
-             sh "aws -o StrictHostKeyChecking=no eks update-kubeconfig --name myapp-eks-cluster"
-             sh "kubectl -o StrictHostKeyChecking=no apply -f nginx-deployment.yaml"
-             sh "kubectl -o StrictHostKeyChecking=no apply -f nginx-service.yaml"
+             sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.28.160 touch hello.txt"
+             sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.28.160 aws  eks update-kubeconfig --name myapp-eks-cluster"
+             sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.28.160 kubectl  apply -f nginx-deployment.yaml"
+             sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.28.160 kubectl  apply -f nginx-service.yaml"
             }
             }
             }
