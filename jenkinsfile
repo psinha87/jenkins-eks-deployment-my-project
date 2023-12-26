@@ -6,7 +6,7 @@ pipeline{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-psinha']]){
                 dir('terraform'){
                 sh "terraform init"
-                sh "terraaform plan"
+                sh "terraform plan"
                 sh "terraform apply -auto-approve"
                 }
                 }
