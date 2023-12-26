@@ -3,7 +3,7 @@ pipeline{
     stages {
         stage("create an EKS cluster"){
             steps{
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-psinha87']]){
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-psinha']]){
                 dir('terraform'){
                 sh "terraform init"
                 sh "terraaform plan"
