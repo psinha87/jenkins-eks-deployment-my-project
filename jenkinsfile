@@ -12,6 +12,17 @@ pipeline{
                 }
             }
         }
+        stage ("deploy to eks"){
+            steps{
+                sshagent(['33027ffa-0256-4d9b-846a-3b6f27864997']) {
+            dir('kubernetes'){
+             sh "aws -o StrictHostKeyChecking=no eks update-kubeconfig --name myapp-eks-cluster"
+             sh "kubectl -o StrictHostKeyChecking=no apply -f nginx-deployment.yaml"
+             sh "kubectl -o StrictHostKeyChecking=no apply -f nginx-service.yaml"
+            }
+            }
+            }
+        }
         
     }
 }
