@@ -1,6 +1,7 @@
 provider "aws" {
     region = "ap-south-1"
 }
+data "aws_availability_zones" "azs" {}
 module "project-vpc"{
     source = "terraform-aws-modules/vpc/aws"
     version = "3.19.0"
@@ -11,7 +12,7 @@ module "project-vpc"{
     azs = var.ap-availability-zones
     enable_nat_gateway   = true
     single_nat_gateway   = true
-    //enable_dns_hostnames = true
+    enable_dns_hostnames = true
     tags = {
     "kubernetes.io/cluster/myapp-eks-cluster" = "shared"
   }
