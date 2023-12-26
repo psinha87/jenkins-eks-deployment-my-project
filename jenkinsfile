@@ -1,0 +1,17 @@
+pipeline{
+    agent any
+    stages {
+        stage("create an EKS cluster"){
+            steps{
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-psinha87']]){
+                dir('terraform'){
+                sh "terraform init"
+                sh "terraaform plan"
+                sh "terraform apply -auto-approve"
+                }
+                }
+            }
+        }
+        
+    }
+}
